@@ -1,0 +1,9 @@
+__tests__
+__mocks__
+public
+dist
+node_modules
+webpack.*
+babel.config.js
+metro.config.js
+jest.config.js
