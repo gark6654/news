@@ -4,9 +4,10 @@ type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
 
 interface IAuthState {
+  user: {} | null;
   isLoaded: boolean;
   isLogged: boolean;
-  user: {} | null;
+  accessToken?: string;
 }
 
 export type {

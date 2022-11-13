@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { EColors } from '@types';
 
 const style = StyleSheet.create({
   root: {
     fontSize: 14,
-    color: 'black',
+    color: EColors.black,
+    fontFamily: 'Poppins-Regular',
   },
 });
 

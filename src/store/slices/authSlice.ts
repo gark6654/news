@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '@types';
-import { getPostById } from '@store/thunks/authThunk';
+import { createSlice } from '@reduxjs/toolkit';
+import { loadAuthUser } from '../thunks/authThunk';
 
 const initialState: IAuthState = {
   user: null,
@@ -15,8 +15,14 @@ export const authSlice = createSlice({
     signOut: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(getPostById.fulfilled, (state, action) => {
-      state.user = action.payload;
+    builder.addCase(loadAuthUser.fulfilled, (state, action) => {
+      if (!action.payload) return;
+
+      state = {
+        user: action.payload,
+        isLogged: true,
+        isLoaded: true,
+      };
     });
   },
 });

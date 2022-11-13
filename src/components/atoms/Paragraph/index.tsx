@@ -1,12 +1,17 @@
-import React from 'react';
-import { Text } from 'react-native';
+import { ReactNode } from 'react';
+import { StyleProp, Text, TextStyle } from 'react-native';
+import styles from './style';
 
 interface IProps {
-  children: string;
+  children: ReactNode;
+  style?: StyleProp<TextStyle>;
 }
 
-const Paragraph = ({ children }: IProps) => (
-  <Text>
+const Paragraph = ({
+  children,
+  style,
+}: IProps) => (
+  <Text style={[styles.root, style]}>
     {children}
   </Text>
 );

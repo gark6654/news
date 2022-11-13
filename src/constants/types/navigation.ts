@@ -3,6 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type RootStackParamListType = {
   Home: undefined;
+  SignIn: undefined;
 }
 
 interface IRoute {
