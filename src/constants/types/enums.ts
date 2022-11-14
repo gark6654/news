@@ -13,6 +13,7 @@ enum EColors {
   error = '#ED2E7E',
   errorDark = '#C30052',
   errorLight = '#FF84B7',
+  inputError = '#FFF3F8',
   background = '#fff',
   backgroundDark = '#1C1E21',
 }

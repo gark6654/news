@@ -4,7 +4,10 @@ import { EColors } from '@types';
 const style = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: EColors.white,
+    backgroundColor: EColors.background,
+  },
+  dark: {
+    backgroundColor: EColors.backgroundDark,
   },
 });
 

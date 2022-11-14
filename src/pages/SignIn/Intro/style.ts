@@ -13,6 +13,9 @@ const style = StyleSheet.create({
   title1: {
     color: EColors.title,
   },
+  title1Dark: {
+    color: EColors.titleDark,
+  },
   title2: {
     color: EColors.primary,
     marginBottom: 10,
@@ -21,6 +24,9 @@ const style = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
     color: EColors.body,
+  },
+  descriptionDark: {
+    color: EColors.bodyDark,
   },
 });
 

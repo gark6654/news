@@ -3,7 +3,6 @@ import { EColors } from '@types';
 
 const style = StyleSheet.create({
   root: {
-    flex: .5,
     marginTop: 30,
   },
   questionWrapper: {
@@ -26,6 +25,9 @@ const style = StyleSheet.create({
   checkboxText: {
     marginLeft: -5,
   },
+  checkboxTextDark: {
+    color: EColors.bodyDark,
+  },
   submitBtn: {
     marginTop: 30,
     padding: 12,
@@ -38,6 +40,23 @@ const style = StyleSheet.create({
     lineHeight: 24,
     fontFamily: 'Poppins-SemiBold',
     color: EColors.white,
+  },
+  questionBox: {
+    flex: .3,
+    marginTop: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  question: {
+    color: EColors.body,
+  },
+  questionDark: {
+    color: EColors.bodyDark,
+  },
+  link: {
+    marginLeft: 10,
+    color: EColors.primary,
   },
 });
 

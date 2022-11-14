@@ -4,9 +4,6 @@ interface ISignInForm {
   remember: boolean;
 }
 
-type ControlNameType = keyof ISignInForm;
-
 export type {
   ISignInForm,
-  ControlNameType,
 };
