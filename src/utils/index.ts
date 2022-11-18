@@ -16,3 +16,5 @@ export const getKeyboardType = (inputType: InputTypes) => {
       return 'default';
   }
 };
+
+export * from './storage';

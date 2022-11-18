@@ -1,13 +1,17 @@
-import { IRoute } from '@types';
+import { IRootRoutes } from '@types';
 import { Homepage, SignInPage } from '@pages';
 
-export const RootRoutes: IRoute[] = [
-  {
-    name: 'Home',
-    component: Homepage,
-  },
-  {
-    name: 'SignIn',
-    component: SignInPage,
-  },
-];
+export const RootRoutes: IRootRoutes = {
+  private: [
+    {
+      name: 'Home',
+      component: Homepage,
+    },
+  ],
+  public: [
+    {
+      name: 'SignIn',
+      component: SignInPage,
+    },
+  ],
+};

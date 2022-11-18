@@ -1,29 +1,41 @@
 import { IAuthState } from '@types';
 import { createSlice } from '@reduxjs/toolkit';
-import { loadAuthUser } from '../thunks/authThunk';
+import { signIn, loadSignedUser } from '../thunks/authThunk';
 
 const initialState: IAuthState = {
   user: null,
+  isSigned: false,
   isLoaded: false,
-  isLogged: false,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    signOut: () => initialState,
+    signOut: () => ({
+      ...initialState,
+      isLoaded: true,
+    }),
   },
   extraReducers: (builder) => {
-    builder.addCase(loadAuthUser.fulfilled, (state, action) => {
-      if (!action.payload) return;
-
-      state = {
-        user: action.payload,
-        isLogged: true,
-        isLoaded: true,
-      };
-    });
+    builder.addCase(signIn.fulfilled, (state, action) => ({
+      user: action.payload ? action.payload : null,
+      isSigned: Boolean(action.payload),
+      isLoaded: true,
+    }));
+    builder.addCase(signIn.rejected, () => ({
+      ...initialState,
+      isLoaded: true,
+    }));
+    builder.addCase(loadSignedUser.fulfilled, (state, action) => ({
+      user: action.payload ? action.payload : null,
+      isSigned: false,
+      isLoaded: true,
+    }));
+    builder.addCase(loadSignedUser.rejected, () => ({
+      ...initialState,
+      isLoaded: true,
+    }));
   },
 });
 

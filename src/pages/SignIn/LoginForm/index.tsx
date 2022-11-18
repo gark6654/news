@@ -23,7 +23,7 @@ const LoginForm = ({
   return (
     <ScrollView style={styles.root}>
       <View>
-        <InputField name="username" control={control} label="username" type="text" required />
+        <InputField name="email" control={control} label="email" type="email" required />
         <InputField name="password" control={control} label="Password" type="password" required showEye />
       </View>
       <View style={styles.questionWrapper}>

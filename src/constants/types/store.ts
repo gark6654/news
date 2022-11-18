@@ -6,7 +6,7 @@ type AppDispatch = typeof store.dispatch
 interface IAuthState {
   user: {} | null;
   isLoaded: boolean;
-  isLogged: boolean;
+  isSigned: boolean;
   accessToken?: string;
 }
 

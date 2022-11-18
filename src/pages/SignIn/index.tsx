@@ -3,12 +3,17 @@ import { View, useColorScheme } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ISignInForm } from '@types';
+import { useAppDispatch } from '@hooks';
+import { signIn } from '@store/thunks/authThunk';
 import Intro from './Intro';
 import LoginForm from './LoginForm';
 import validation from './validation';
+
 import styles from './style';
 
 const SignIn = () => {
+  const dispatch = useAppDispatch();
+
   const theme = useColorScheme();
   const isDark = useMemo(() => theme === 'dark', [theme]);
   const {
@@ -17,7 +22,7 @@ const SignIn = () => {
     handleSubmit,
   } = useForm<ISignInForm>({
     defaultValues: {
-      username: '',
+      email: '',
       password: '',
       remember: false,
     },
@@ -27,8 +32,12 @@ const SignIn = () => {
 
   const toggleRemember = (checked: boolean) => setValue('remember', checked);
 
-  const onFormSuccess = (values: ISignInForm) => {
-    console.log(values);
+  const onFormSuccess = async (values: ISignInForm) => {
+    try {
+      dispatch(signIn(values));
+    } catch (e) {
+      console.log('client', e);
+    }
   };
 
   return (

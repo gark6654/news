@@ -1,4 +1,5 @@
 enum EThunks {
+  signIn = 'signIn',
   loadAuthUser = 'loadAuthUser',
 }
 

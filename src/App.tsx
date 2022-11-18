@@ -1,33 +1,21 @@
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import { Provider } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { EColors, RootStackParamListType } from '@types';
-import { RootRoutes } from '@constants/routes';
-import { store } from './store/';
 import { useMemo } from 'react';
+import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { EColors } from '@types';
+import { store } from './store/';
+import { RootNavigator } from '@components/organisms';
 
 const App = () => {
   const theme = useColorScheme();
   const isDark = useMemo(() => theme === 'dark', [theme]);
-  const {
-    Navigator,
-    Screen,
-  } = createNativeStackNavigator<RootStackParamListType>();
 
   return (
     <Provider store={store}>
       <StatusBar barStyle={isDark ? 'light-content' : 'dark-content'} />
       <View style={[styles.root, isDark && styles.dark]}>
         <NavigationContainer>
-          <Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
-            {RootRoutes.map(({
-              name,
-              component,
-            }) => (
-              <Screen key={name} name={name} component={component} />
-            ))}
-          </Navigator>
+          <RootNavigator isDark={isDark} />
         </NavigationContainer>
       </View>
     </Provider>

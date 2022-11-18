@@ -1,23 +1,32 @@
-import { EThunks } from '@constants/types';
+import { EThunks, SignInPayloadType } from '@constants/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// import api from '@services/api';
+import api from '@services/api';
+import { readStorage } from '@utils';
 
-const loadAuthUser = createAsyncThunk(EThunks.loadAuthUser, async () => {
+export const signIn = createAsyncThunk(EThunks.signIn, async (payload: SignInPayloadType) => {
   try {
-    const accessToken = AsyncStorage.getItem('accessToken');
+    const { data } = await api.auth.signIn(payload);
+
+    return data;
+  } catch (e) {
+    // todo => handle 403...
+    console.log(e);
+  }
+});
+
+export const loadSignedUser = createAsyncThunk(EThunks.loadAuthUser, async () => {
+  try {
+    const accessToken = await readStorage('accessToken');
 
     if (!accessToken) {
       return null;
     }
-    // const { data } = await api.user.getMe();
-    //
-    // return data;
-  } catch (e) {
 
+    const { data } = await api.user.getMe();
+
+    return data;
+  } catch (e) {
+    // todo => handle 403...
+    console.log(e);
   }
 });
-
-export {
-  loadAuthUser,
-};
