@@ -4,8 +4,8 @@ import { signIn, loadSignedUser } from '../thunks/authThunk';
 
 const initialState: IAuthState = {
   user: null,
-  isSigned: false,
-  isLoaded: false,
+  signed: false,
+  loaded: false,
 };
 
 export const authSlice = createSlice({
@@ -14,27 +14,21 @@ export const authSlice = createSlice({
   reducers: {
     signOut: () => ({
       ...initialState,
-      isLoaded: true,
+      loaded: true,
     }),
   },
   extraReducers: (builder) => {
     builder.addCase(signIn.fulfilled, (state, action) => ({
       user: action.payload ? action.payload : null,
-      isSigned: Boolean(action.payload),
-      isLoaded: true,
-    }));
-    builder.addCase(signIn.rejected, () => ({
-      ...initialState,
-      isLoaded: true,
+      signed: Boolean(action.payload),
+      loaded: true,
+      accessToken: action.payload?.accessToken,
     }));
     builder.addCase(loadSignedUser.fulfilled, (state, action) => ({
       user: action.payload ? action.payload : null,
-      isSigned: false,
-      isLoaded: true,
-    }));
-    builder.addCase(loadSignedUser.rejected, () => ({
-      ...initialState,
-      isLoaded: true,
+      signed: false,
+      loaded: true,
+      accessToken: action.payload?.accessToken,
     }));
   },
 });

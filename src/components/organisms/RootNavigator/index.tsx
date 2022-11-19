@@ -20,19 +20,18 @@ const RootNavigator = ({ isDark }: IProps) => {
   } = createNativeStackNavigator<RootStackParamListType>();
 
   const {
-    isLoaded,
-    isSigned,
-    user,
+    loaded,
+    signed,
   } = useAppSelector(selectAuth);
-  console.log(user);
 
   const loadUser = useCallback(() => dispatch(loadSignedUser()), [dispatch]);
 
   useEffect(() => {
+    console.log('hello world');
     loadUser();
   }, [loadUser]);
 
-  if (!isLoaded) {
+  if (!loaded) {
     return (
       <Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
         <Screen name="Loading" component={LoadingPage} initialParams={{ isDark }} />
@@ -40,7 +39,7 @@ const RootNavigator = ({ isDark }: IProps) => {
     );
   }
 
-  if (!isSigned) {
+  if (!signed) {
     return (
       <Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
         {RootRoutes.public.map(({
@@ -54,7 +53,7 @@ const RootNavigator = ({ isDark }: IProps) => {
     );
   }
 
-  if (isSigned) {
+  if (signed) {
     return (
       <Navigator initialRouteName="SignIn" screenOptions={{ headerShown: false }}>
         {RootRoutes.private.map(({

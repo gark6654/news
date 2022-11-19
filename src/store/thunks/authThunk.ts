@@ -1,15 +1,16 @@
-import { EThunks, SignInPayloadType } from '@constants/types';
+import { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { EThunks, ISignInPayload } from '@constants/types';
 import api from '@services/api';
-import { readStorage } from '@utils';
+import { readStorage, setStorage } from '@utils';
 
-export const signIn = createAsyncThunk(EThunks.signIn, async (payload: SignInPayloadType) => {
+export const signIn = createAsyncThunk(EThunks.signIn, async (payload: ISignInPayload) => {
   try {
-    const { data } = await api.auth.signIn(payload);
-
+    const { data } = await api.auth.signIn(payload.credentials);
+    await setStorage('accessToken', data.accessToken);
     return data;
   } catch (e) {
-    // todo => handle 403...
+    payload.onError(e as AxiosError);
     console.log(e);
   }
 });
@@ -26,7 +27,6 @@ export const loadSignedUser = createAsyncThunk(EThunks.loadAuthUser, async () =>
 
     return data;
   } catch (e) {
-    // todo => handle 403...
     console.log(e);
   }
 });

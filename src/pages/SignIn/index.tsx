@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { View, useColorScheme } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { AxiosError } from 'axios';
 import { ISignInForm } from '@types';
 import { useAppDispatch } from '@hooks';
 import { signIn } from '@store/thunks/authThunk';
@@ -20,6 +21,7 @@ const SignIn = () => {
     control,
     setValue,
     handleSubmit,
+    setError,
   } = useForm<ISignInForm>({
     defaultValues: {
       email: '',
@@ -30,15 +32,29 @@ const SignIn = () => {
     resolver: yupResolver(validation),
   });
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const toggleRemember = (checked: boolean) => setValue('remember', checked);
 
-  const onFormSuccess = async (values: ISignInForm) => {
-    try {
-      dispatch(signIn(values));
-    } catch (e) {
-      console.log('client', e);
+  const signInError = useCallback((e: AxiosError) => {
+    if (e.response?.status === 403) {
+      setError('email', { message: 'Email or Password is not valid' });
+      setError('password', { message: 'Email or Password is not valid' });
     }
-  };
+
+    setIsLoading(false);
+  }, [setError]);
+
+  const onFormSuccess = useCallback(async (values: ISignInForm) => {
+    setIsLoading(true);
+
+    await dispatch(signIn({
+      credentials: values,
+      onError: signInError,
+    }));
+
+    setIsLoading(false);
+  }, [dispatch, signInError]);
 
   return (
     <View style={[styles.root, isDark && styles.dark]}>
@@ -47,6 +63,7 @@ const SignIn = () => {
         control={control}
         toggleRemember={toggleRemember}
         submit={handleSubmit((onFormSuccess))}
+        isLoading={isLoading}
       />
     </View>
   );

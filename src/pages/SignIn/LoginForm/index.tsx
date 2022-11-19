@@ -8,12 +8,14 @@ import styles from './style';
 
 interface IProps {
   control: Control<ISignInForm>;
+  isLoading: boolean;
   toggleRemember: (checked: boolean) => void;
   submit: () => void;
 }
 
 const LoginForm = ({
   control,
+  isLoading,
   toggleRemember,
   submit,
 }: IProps) => {
@@ -23,7 +25,7 @@ const LoginForm = ({
   return (
     <ScrollView style={styles.root}>
       <View>
-        <InputField name="email" control={control} label="email" type="email" required />
+        <InputField name="email" control={control} label="Email" type="email" required />
         <InputField name="password" control={control} label="Password" type="password" required showEye />
       </View>
       <View style={styles.questionWrapper}>
@@ -35,7 +37,7 @@ const LoginForm = ({
           <Paragraph style={styles.forgot}>Forgot the password?</Paragraph>
         </InternalLink>
       </View>
-      <Button onPress={submit}>
+      <Button onPress={submit} disabled={isLoading}>
         <View style={styles.submitBtn}>
           <Paragraph style={styles.submitText}>Login</Paragraph>
         </View>
