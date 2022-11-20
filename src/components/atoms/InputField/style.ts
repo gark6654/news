@@ -25,7 +25,8 @@ const style = StyleSheet.create({
   },
   inputDark: {
     color: EColors.bodyDark,
-    borderColor: EColors.bodyDark,
+    borderColor: EColors.inputDark,
+    backgroundColor: EColors.inputDark,
   },
   inputError: {
     borderColor: EColors.errorDark,

@@ -4,16 +4,10 @@ import { RootRoutes } from '@constants/routes';
 import { LoadingPage } from '@pages';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectAuth } from '@store/selectors/authSelector';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { View } from 'react-native';
-import { loadSignedUser, logout } from '@store/thunks/authThunk';
 
-interface IProps {
-  isDark: boolean;
-}
-
-const RootNavigator = ({ isDark }: IProps) => {
-  const dispatch = useAppDispatch();
+const RootNavigator = () => {
   const {
     Navigator,
     Screen,
@@ -24,10 +18,10 @@ const RootNavigator = ({ isDark }: IProps) => {
     signed,
   } = useAppSelector(selectAuth);
 
-  const loadUser = useCallback(async () => {
-    await dispatch(logout());
-    await dispatch(loadSignedUser());
-  }, [dispatch]);
+  // const loadUser = useCallback(async () => {
+  //   await dispatch(logout());
+  //   await dispatch(loadSignedUser());
+  // }, [dispatch]);
 
   useEffect(() => {
   }, []);
@@ -35,7 +29,7 @@ const RootNavigator = ({ isDark }: IProps) => {
   if (!loaded) {
     return (
       <Navigator initialRouteName="Loading" screenOptions={{ headerShown: false }}>
-        <Screen name="Loading" component={LoadingPage} initialParams={{ isDark }} />
+        <Screen name="Loading" component={LoadingPage} />
       </Navigator>
     );
   }
@@ -46,9 +40,8 @@ const RootNavigator = ({ isDark }: IProps) => {
         {RootRoutes.public.map(({
           name,
           component,
-          initialParams,
         }) => (
-          <Screen key={name} name={name} component={component} initialParams={{ isDark, ...initialParams }} />
+          <Screen key={name} name={name} component={component} />
         ))}
       </Navigator>
     );
@@ -60,9 +53,8 @@ const RootNavigator = ({ isDark }: IProps) => {
         {RootRoutes.private.map(({
           name,
           component,
-          initialParams,
         }) => (
-          <Screen key={name} name={name} component={component} initialParams={{ isDark, ...initialParams }} />
+          <Screen key={name} name={name} component={component} />
         ))}
       </Navigator>
     );

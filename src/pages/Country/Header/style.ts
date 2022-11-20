@@ -3,8 +3,19 @@ import { EColors } from '@types';
 
 const style = (isDark: boolean) => StyleSheet.create({
   root: {
-    flex: 1,
     backgroundColor: isDark ? EColors.backgroundDark : EColors.background,
+  },
+  heading: {
+    color: isDark ? EColors.white : EColors.black,
+  },
+  wrapper: {
+    position: 'relative',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  backBtn: {
+    position: 'absolute',
+    left: 0,
   },
 });
 

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,10 +13,10 @@ import validation from './validation';
 
 import styles from './style';
 
-const SignIn = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignIn'>) => {
+const SignIn = ({}: NativeStackScreenProps<RootStackParamListType, 'SignIn'>) => {
   const dispatch = useAppDispatch();
-  const { params } = route;
-  const themeStyles = useMemo(() => styles(params.isDark), [params]);
+  const isDark = useColorScheme() !== 'light';
+  const themeStyles = useMemo(() => styles(isDark), [isDark]);
 
   const {
     control,

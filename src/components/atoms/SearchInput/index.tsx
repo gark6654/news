@@ -1,12 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  NativeSyntheticEvent,
-  TextInput,
-  TextInputChangeEventData,
-  View,
-} from 'react-native';
+import { NativeSyntheticEvent, TextInput, TextInputChangeEventData, View } from 'react-native';
 import { useDebounce } from '@hooks';
 import styles from './style';
+import { SearchIcon } from '@components/icons';
+import { EColors } from '@types';
 
 interface IProps {
   isDark: boolean;
@@ -53,7 +50,9 @@ const SearchInput = ({
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
+        style={themedStyle.input}
       />
+      <SearchIcon fill={isDark ? EColors.white : EColors.black} />
     </View>
   );
 };

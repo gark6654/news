@@ -1,22 +1,13 @@
 import { ReactElement } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { ISignUpForm } from '@constants/types/forms';
 
 type RootStackParamListType = {
-  Home: {
-    isDark: boolean;
-  };
-  SignIn: {
-    isDark: boolean;
-  };
-  SignUp: {
-    isDark: boolean;
-  };
-  Country: {
-    isDark: boolean;
-  };
-  Loading: {
-    isDark: boolean;
-  };
+  Home: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  Country: ISignUpForm;
+  Loading: undefined;
 }
 
 interface IRoute {

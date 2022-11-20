@@ -17,4 +17,5 @@ export const getKeyboardType = (inputType: InputTypes) => {
   }
 };
 
+export * from './common';
 export * from './storage';

@@ -1,6 +1,6 @@
 import { WEB_API_ORIGIN } from '@env';
 import axios from 'axios';
-import { readStorage } from '@utils';
+// import { readStorage } from '@utils';
 
 const axiosInstance = axios.create({
   baseURL: `${WEB_API_ORIGIN}/api`,

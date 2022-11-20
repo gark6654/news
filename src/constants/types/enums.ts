@@ -7,6 +7,7 @@ enum EThunks {
 enum EColors {
   black = '#000',
   white = '#fff',
+  grey = '#E5E8E8',
   primary = '#1877F2',
   title = '#050505',
   titleDark = '#E4E6EB',
@@ -16,6 +17,7 @@ enum EColors {
   errorDark = '#C30052',
   errorLight = '#FF84B7',
   inputError = '#FFF3F8',
+  inputDark = '#3A3B3C',
   background = '#fff',
   backgroundDark = '#1C1E21',
 }

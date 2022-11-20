@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { useColorScheme, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,16 +13,11 @@ import validation from './validation';
 
 import styles from './style';
 
-const SignUp = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignUp'>) => {
+const SignUp = ({ navigation }: NativeStackScreenProps<RootStackParamListType, 'SignUp'>) => {
+  const { navigate } = navigation;
   const dispatch = useAppDispatch();
-  const { params } = route;
-  const {
-    isDark,
-    themeStyles,
-  } = useMemo(() => ({
-    isDark: params.isDark,
-    themeStyles: styles(params.isDark),
-  }), [params]);
+  const isDark = useColorScheme() !== 'light';
+  const themeStyles = useMemo(() => styles(isDark), [isDark]);
 
   const {
     control,
@@ -53,7 +48,8 @@ const SignUp = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignU
     setIsLoading(true);
 
     if (values) {
-      console.log(values);
+      setIsLoading(false);
+      navigate('Country', values);
       return;
     }
 
@@ -63,7 +59,7 @@ const SignUp = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignU
     }));
 
     setIsLoading(false);
-  }, [dispatch, signInError]);
+  }, [dispatch, navigate, signInError]);
 
   return (
     <View style={themeStyles.root}>

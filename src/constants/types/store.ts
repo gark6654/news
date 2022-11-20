@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { store } from '@store/index';
-import { SignInPayloadType } from '@constants/types';
+import { IGroupByName, SignInPayloadType } from '@constants/types';
 
 type RootState = ReturnType<typeof store.getState>
 type AppDispatch = typeof store.dispatch
@@ -27,6 +27,11 @@ interface IAuthState {
   accessToken?: string;
 }
 
+interface ICountriesState {
+  countries: IGroupByName[];
+  loaded: boolean;
+}
+
 interface ISignInPayload {
   credentials: SignInPayloadType;
   onError: (e: AxiosError) => void;
@@ -36,5 +41,6 @@ export type {
   RootState,
   AppDispatch,
   IAuthState,
+  ICountriesState,
   ISignInPayload,
 };
