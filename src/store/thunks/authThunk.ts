@@ -2,9 +2,9 @@ import { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { EThunks, ISignInPayload } from '@constants/types';
 import api from '@services/api';
-import { readStorage, setStorage } from '@utils';
+import { readStorage, removeStorage, setStorage } from '@utils';
 
-export const signIn = createAsyncThunk(EThunks.signIn, async (payload: ISignInPayload) => {
+export const login = createAsyncThunk(EThunks.login, async (payload: ISignInPayload) => {
   try {
     const { data } = await api.auth.signIn(payload.credentials);
     await setStorage('accessToken', data.accessToken);
@@ -15,7 +15,15 @@ export const signIn = createAsyncThunk(EThunks.signIn, async (payload: ISignInPa
   }
 });
 
-export const loadSignedUser = createAsyncThunk(EThunks.loadAuthUser, async () => {
+export const logout = createAsyncThunk(EThunks.logout, async () => {
+  try {
+    await removeStorage('accessToken');
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+export const loadSignedUser = createAsyncThunk(EThunks.loadSignedUser, async () => {
   try {
     const accessToken = await readStorage('accessToken');
 

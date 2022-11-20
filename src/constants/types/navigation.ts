@@ -8,6 +8,12 @@ type RootStackParamListType = {
   SignIn: {
     isDark: boolean;
   };
+  SignUp: {
+    isDark: boolean;
+  };
+  Country: {
+    isDark: boolean;
+  };
   Loading: {
     isDark: boolean;
   };

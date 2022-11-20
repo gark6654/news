@@ -39,7 +39,6 @@ const style = StyleSheet.create({
   errorBox: {
     marginTop: 5,
     flexDirection: 'row',
-    alignItems: 'center',
   },
   errorMessage: {
     marginLeft: 5,

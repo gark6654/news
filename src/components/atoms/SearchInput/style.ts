@@ -3,8 +3,10 @@ import { EColors } from '@types';
 
 const style = (isDark: boolean) => StyleSheet.create({
   root: {
-    flex: 1,
-    backgroundColor: isDark ? EColors.backgroundDark : EColors.background,
+    borderWidth: 1,
+    borderColor: EColors.black,
+    borderRadius: 5,
+    height: 48,
   },
 });
 

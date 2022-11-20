@@ -1,16 +1,18 @@
 import { ReactNode, useCallback } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import { RootStackParamListType } from '@types';
 import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
   to: keyof RootStackParamListType;
   children: ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
 
 const InternalLink = ({
   to,
   children,
+  style,
 }: IProps) => {
   const { navigate } = useNavigation();
 
@@ -19,7 +21,7 @@ const InternalLink = ({
   }, [navigate, to]);
 
   return (
-    <TouchableOpacity onPress={redirect}>
+    <TouchableOpacity onPress={redirect} style={style}>
       {children}
     </TouchableOpacity>
   );

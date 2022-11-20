@@ -4,38 +4,41 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AxiosError } from 'axios';
-import { ISignInForm, RootStackParamListType } from '@types';
+import { ISignUpForm, RootStackParamListType } from '@types';
 import { useAppDispatch } from '@hooks';
 import { login } from '@store/thunks/authThunk';
 import Intro from './Intro';
-import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 import validation from './validation';
 
 import styles from './style';
 
-const SignIn = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignIn'>) => {
+const SignUp = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignUp'>) => {
   const dispatch = useAppDispatch();
   const { params } = route;
-  const themeStyles = useMemo(() => styles(params.isDark), [params]);
+  const {
+    isDark,
+    themeStyles,
+  } = useMemo(() => ({
+    isDark: params.isDark,
+    themeStyles: styles(params.isDark),
+  }), [params]);
 
   const {
     control,
-    setValue,
     handleSubmit,
     setError,
-  } = useForm<ISignInForm>({
+  } = useForm<ISignUpForm>({
     defaultValues: {
       email: '',
       password: '',
-      remember: false,
+      confirm: '',
     },
     reValidateMode: 'onChange',
     resolver: yupResolver(validation),
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const toggleRemember = (checked: boolean) => setValue('remember', checked);
 
   const signInError = useCallback((e: AxiosError) => {
     if (e.response?.status === 403) {
@@ -46,8 +49,13 @@ const SignIn = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignI
     setIsLoading(false);
   }, [setError]);
 
-  const onFormSuccess = useCallback(async (values: ISignInForm) => {
+  const onFormSuccess = useCallback(async (values: ISignUpForm) => {
     setIsLoading(true);
+
+    if (values) {
+      console.log(values);
+      return;
+    }
 
     await dispatch(login({
       credentials: values,
@@ -60,14 +68,14 @@ const SignIn = ({ route }: NativeStackScreenProps<RootStackParamListType, 'SignI
   return (
     <View style={themeStyles.root}>
       <Intro />
-      <LoginForm
+      <RegistrationForm
         control={control}
-        toggleRemember={toggleRemember}
-        submit={handleSubmit((onFormSuccess))}
         isLoading={isLoading}
+        isDark={isDark}
+        submit={handleSubmit((onFormSuccess))}
       />
     </View>
   );
 };
 
-export default SignIn;
+export default SignUp;

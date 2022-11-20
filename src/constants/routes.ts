@@ -1,5 +1,5 @@
 import { IRootRoutes } from '@types';
-import { Homepage, SignInPage } from '@pages';
+import { Homepage, SignInPage, SignUpPage, CountryPage } from '@pages';
 
 export const RootRoutes: IRootRoutes = {
   private: [
@@ -7,11 +7,23 @@ export const RootRoutes: IRootRoutes = {
       name: 'Home',
       component: Homepage,
     },
+    {
+      name: 'Country',
+      component: CountryPage,
+    },
   ],
   public: [
     {
       name: 'SignIn',
       component: SignInPage,
+    },
+    {
+      name: 'SignUp',
+      component: SignUpPage,
+    },
+    {
+      name: 'Country',
+      component: CountryPage,
     },
   ],
 };

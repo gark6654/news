@@ -13,7 +13,7 @@ interface IProps {
   submit: () => void;
 }
 
-const LoginForm = ({
+const RegistrationForm = ({
   control,
   isLoading,
   toggleRemember,
@@ -46,7 +46,7 @@ const LoginForm = ({
         <Paragraph style={[styles.question, isDark && styles.questionDark]}>
           Don't have an account ?
         </Paragraph>
-        <InternalLink to="Home">
+        <InternalLink to="SignUp">
           <Paragraph style={styles.link}>Sign up</Paragraph>
         </InternalLink>
       </View>
@@ -54,4 +54,4 @@ const LoginForm = ({
   );
 };
 
-export default LoginForm;
+export default RegistrationForm;

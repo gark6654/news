@@ -1,24 +1,23 @@
 import { IAuthState } from '@types';
 import { createSlice } from '@reduxjs/toolkit';
-import { signIn, loadSignedUser } from '../thunks/authThunk';
+import { loadSignedUser, login, logout } from '../thunks/authThunk';
 
 const initialState: IAuthState = {
   user: null,
   signed: false,
-  loaded: false,
+  loaded: true,
 };
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    signOut: () => ({
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(logout.fulfilled, () => ({
       ...initialState,
       loaded: true,
-    }),
-  },
-  extraReducers: (builder) => {
-    builder.addCase(signIn.fulfilled, (state, action) => ({
+    }));
+    builder.addCase(login.fulfilled, (state, action) => ({
       user: action.payload ? action.payload : null,
       signed: Boolean(action.payload),
       loaded: true,
@@ -26,12 +25,12 @@ export const authSlice = createSlice({
     }));
     builder.addCase(loadSignedUser.fulfilled, (state, action) => ({
       user: action.payload ? action.payload : null,
-      signed: false,
+      signed: Boolean(action.payload),
       loaded: true,
       accessToken: action.payload?.accessToken,
     }));
   },
 });
 
-export const { signOut } = authSlice.actions;
+export const {} = authSlice.actions;
 export default authSlice.reducer;

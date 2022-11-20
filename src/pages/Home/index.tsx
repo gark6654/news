@@ -1,16 +1,16 @@
 import { View } from 'react-native';
 import { useAppDispatch } from '@hooks';
-import { signOut } from '@store/slices/authSlice';
+import { logout } from '@store/thunks/authThunk';
 import { Button, Paragraph } from '@components/atoms';
 
 const Home = () => {
   const dispatch = useAppDispatch();
 
-  const logout = () => dispatch(signOut());
+  const signOut = () => dispatch(logout());
 
   return (
     <View>
-      <Button onPress={logout}>
+      <Button onPress={signOut}>
         <Paragraph>Log out</Paragraph>
       </Button>
     </View>

@@ -39,7 +39,10 @@ const setStorage = async (key: AsyncStorageKeys, value: unknown, expire?: number
   return await AsyncStorage.setItem(key, JSON.stringify(data));
 };
 
+const removeStorage = async (key: AsyncStorageKeys) => await AsyncStorage.removeItem(key);
+
 export {
   readStorage,
   setStorage,
+  removeStorage,
 };

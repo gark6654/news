@@ -6,16 +6,13 @@ const axiosInstance = axios.create({
   baseURL: `${WEB_API_ORIGIN}/api`,
 });
 
-axiosInstance.interceptors.request.use(async config => {
-  const token = await readStorage('accessToken');
-
-  if (token) {
-    config.headers ??= {
-      'Content-Type': 'application/json',
-    };
-    config.headers.Authorization = 'Bearer ' + token;
-  }
-  return config;
-});
+axiosInstance.interceptors.request.use(config =>
+  // const token = await readStorage('accessToken');
+  //
+  // if (token) {
+  //   config.headers ??= {};
+  //   config.headers.Authorization = 'Bearer ' + token;
+  // }
+  config);
 
 export default axiosInstance;

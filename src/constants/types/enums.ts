@@ -1,6 +1,7 @@
 enum EThunks {
-  signIn = 'signIn',
-  loadAuthUser = 'loadAuthUser',
+  login = 'login',
+  logout = 'logout',
+  loadSignedUser = 'loadSignedUser',
 }
 
 enum EColors {

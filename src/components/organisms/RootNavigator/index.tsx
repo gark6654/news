@@ -4,9 +4,9 @@ import { RootRoutes } from '@constants/routes';
 import { LoadingPage } from '@pages';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectAuth } from '@store/selectors/authSelector';
-import { loadSignedUser } from '@store/thunks/authThunk';
 import { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
+import { loadSignedUser, logout } from '@store/thunks/authThunk';
 
 interface IProps {
   isDark: boolean;
@@ -24,12 +24,13 @@ const RootNavigator = ({ isDark }: IProps) => {
     signed,
   } = useAppSelector(selectAuth);
 
-  const loadUser = useCallback(() => dispatch(loadSignedUser()), [dispatch]);
+  const loadUser = useCallback(async () => {
+    await dispatch(logout());
+    await dispatch(loadSignedUser());
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log('hello world');
-    loadUser();
-  }, [loadUser]);
+  }, []);
 
   if (!loaded) {
     return (
