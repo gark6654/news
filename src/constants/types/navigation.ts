@@ -2,12 +2,17 @@ import { ReactElement } from 'react';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ISignUpForm } from '@constants/types/forms';
 
+interface IFillProfileParams extends ISignUpForm {
+  country: string;
+}
+
 type RootStackParamListType = {
+  Loading: undefined;
   Home: undefined;
   SignIn: undefined;
   SignUp: undefined;
   Country: ISignUpForm;
-  Loading: undefined;
+  FillProfile: IFillProfileParams;
 }
 
 interface IRoute {
@@ -25,4 +30,5 @@ export type {
   IRoute,
   IRootRoutes,
   RootStackParamListType,
+  IFillProfileParams,
 };

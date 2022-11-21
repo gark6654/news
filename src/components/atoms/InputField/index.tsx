@@ -18,6 +18,7 @@ interface IProps {
   placeholder?: string;
   required?: boolean;
   showEye?: boolean;
+  multiline?: boolean;
   style?: StyleProp<TextStyle>;
 }
 
@@ -30,6 +31,7 @@ const InputField = ({
   placeholder,
   required,
   showEye,
+  multiline,
   style,
 }: IProps) => {
   const theme = useColorScheme();
@@ -78,7 +80,15 @@ const InputField = ({
               placeholder={placeholder}
               keyboardType={getKeyboardType(type)}
               secureTextEntry={isSecure}
-              style={[styles.input, style, isDark && styles.inputDark, errors[name] && styles.inputError]}
+              multiline={multiline}
+              numberOfLines={1}
+              style={[
+                styles.input,
+                multiline && styles.area,
+                style,
+                isDark && styles.inputDark,
+                errors[name] && styles.inputError,
+              ]}
             />
             {showEye && !errors[name] && (
               <Button onPress={toggleSymbols} style={styles.inputBtn}>

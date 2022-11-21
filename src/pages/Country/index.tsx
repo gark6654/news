@@ -15,7 +15,10 @@ const Country = ({
   navigation,
 }: NativeStackScreenProps<RootStackParamListType, 'Country'>) => {
   const { params } = route;
-  const { goBack } = navigation;
+  const {
+    goBack,
+    navigate,
+  } = navigation;
   const dispatch = useAppDispatch();
   const isDark = useColorScheme() !== 'light';
   const themeStyles = useMemo(() => styles(isDark), [isDark]);
@@ -36,8 +39,16 @@ const Country = ({
   }, [country]);
 
   const submit = useCallback(() => {
-    console.log({ country, ...values });
-  }, [country, values]);
+    if (!country) {
+      return;
+    }
+
+    const data = {
+      ...values,
+      country,
+    };
+    navigate('FillProfile', data);
+  }, [country, values, navigate]);
 
   return (
     <View style={themeStyles.root}>

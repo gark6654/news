@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { View } from 'react-native';
+import { EColors } from '@types';
 import { ArrowIcon } from '@components/icons';
 import { Button, Heading, SearchInput } from '@components/atoms';
 import styles from './style';
-import { EColors } from '@types';
 
 interface IProps {
   isDark: boolean;

@@ -23,6 +23,9 @@ const style = StyleSheet.create({
     borderStyle: 'solid',
     borderColor: EColors.body,
   },
+  area: {
+    height: 100,
+  },
   inputDark: {
     color: EColors.bodyDark,
     borderColor: EColors.inputDark,

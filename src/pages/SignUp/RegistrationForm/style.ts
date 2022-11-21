@@ -5,15 +5,6 @@ const style = StyleSheet.create({
   root: {
     marginTop: 30,
   },
-  forgot: {
-    color: EColors.primary,
-  },
-  checkboxText: {
-    marginLeft: -5,
-  },
-  checkboxTextDark: {
-    color: EColors.bodyDark,
-  },
   submitBtn: {
     marginTop: 30,
     padding: 12,
