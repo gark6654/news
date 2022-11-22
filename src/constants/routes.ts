@@ -4,7 +4,7 @@ import {
   SignInPage,
   SignUpPage,
   CountryPage,
-  FillProfilePage,
+  FillProfilePage, ChooseTopicPage,
 } from '@pages';
 
 export const RootRoutes: IRootRoutes = {
@@ -30,6 +30,10 @@ export const RootRoutes: IRootRoutes = {
     {
       name: 'FillProfile',
       component: FillProfilePage,
+    },
+    {
+      name: 'ChooseTopic',
+      component: ChooseTopicPage,
     },
   ],
 };

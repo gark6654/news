@@ -1,11 +1,10 @@
+import { View } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamListType } from '@types';
-import { RootRoutes } from '@constants/routes';
-import { LoadingPage } from '@pages';
-import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectAuth } from '@store/selectors/authSelector';
-import { useEffect } from 'react';
-import { View } from 'react-native';
+import { RootRoutes } from '@constants/routes';
+import { useAppSelector } from '@hooks';
+import { LoadingPage } from '@pages';
 
 const RootNavigator = () => {
   const {
@@ -17,14 +16,6 @@ const RootNavigator = () => {
     loaded,
     signed,
   } = useAppSelector(selectAuth);
-
-  // const loadUser = useCallback(async () => {
-  //   await dispatch(logout());
-  //   await dispatch(loadSignedUser());
-  // }, [dispatch]);
-
-  useEffect(() => {
-  }, []);
 
   if (!loaded) {
     return (

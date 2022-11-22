@@ -17,6 +17,7 @@ export type {
   IIconProps,
 };
 
+export * from './data';
 export * from './navigation';
 export * from './store';
 export * from './api';

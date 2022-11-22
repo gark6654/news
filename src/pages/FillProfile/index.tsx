@@ -16,7 +16,10 @@ const FillProfile = ({
 }: NativeStackScreenProps<RootStackParamListType, 'FillProfile'>) => {
   const theme = useColorScheme();
   const { params } = route;
-  const { goBack } = navigation;
+  const {
+    goBack,
+    navigate,
+  } = navigation;
   const {
     handleSubmit,
     control,
@@ -24,7 +27,7 @@ const FillProfile = ({
     resolver: yupResolver(validationSchema),
   });
 
-  const data = useMemo(() => params, [params]);
+  const values = useMemo(() => params, [params]);
   const {
     themeStyles,
     isDark,
@@ -35,12 +38,14 @@ const FillProfile = ({
 
   const [] = useState<boolean>(false);
 
-  const onFormSuccess = useCallback((values: IFillForm) => {
-    console.log({
+  const onFormSuccess = useCallback((formValues: IFillForm) => {
+    const data = {
       ...values,
-      ...data,
-    });
-  }, [data]);
+      ...formValues,
+    };
+
+    navigate('ChooseTopic', data);
+  }, [values, navigate]);
 
   return (
     <View style={themeStyles.root}>

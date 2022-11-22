@@ -6,6 +6,9 @@ interface IFillProfileParams extends ISignUpForm {
   country: string;
 }
 
+interface IChooseTopicParams extends IFillProfileParams {
+}
+
 type RootStackParamListType = {
   Loading: undefined;
   Home: undefined;
@@ -13,6 +16,7 @@ type RootStackParamListType = {
   SignUp: undefined;
   Country: ISignUpForm;
   FillProfile: IFillProfileParams;
+  ChooseTopic: IChooseTopicParams;
 }
 
 interface IRoute {
@@ -31,4 +35,5 @@ export type {
   IRootRoutes,
   RootStackParamListType,
   IFillProfileParams,
+  IChooseTopicParams,
 };

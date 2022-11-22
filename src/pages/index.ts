@@ -4,3 +4,4 @@ export { default as SignInPage } from './SignIn';
 export { default as SignUpPage } from './SignUp';
 export { default as CountryPage } from './Country';
 export { default as FillProfilePage } from './FillProfile';
+export { default as ChooseTopicPage } from './ChooseTopic';
